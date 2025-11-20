@@ -779,6 +779,6 @@ export const FileExtension = [
 
     /** BitTorrent File */
     'torrent',
-];
+] as const satisfies readonly string[];
 
-export type FileExtension = (typeof FileExtension)[number];
+export type FileExtension = (typeof FileExtension)[number] | (string & {});
