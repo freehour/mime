@@ -782,3 +782,5 @@ export const FileExtension = [
 ] as const satisfies readonly string[];
 
 export type FileExtension = (typeof FileExtension)[number] | (string & {});
+export type FileExtensionWithDot = `.${typeof FileExtension[number]}` | (string & {});
+

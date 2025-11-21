@@ -127,7 +127,7 @@ export type MimeSubtype<T extends MimeType = MimeType> = T extends keyof typeof 
 
 
 type KnownMimeCode<T extends MimeType = MimeType> = T extends keyof typeof MimeSubtype
-    ? `${T}/${typeof MimeSubtype[T & keyof typeof MimeSubtype][number]}`
+    ? `${T}/${typeof MimeSubtype[T & keyof typeof MimeSubtype][number] | '*'}`
     : never;
 
 /**
@@ -141,7 +141,6 @@ export type MimeCode<T extends MimeType = MimeType> = T extends keyof typeof Mim
     : T extends '*'
         ? '*/*'
         : KnownMimeCode | (`${string}/${string}` & {});
-
 
 /**
  * Represents a MIME type string.
