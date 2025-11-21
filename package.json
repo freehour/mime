@@ -3,7 +3,7 @@
     "private": false,
     "displayName": "mime",
     "description": "MIME types, parsing, and detection",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "type": "module",
     "repository": {
         "type": "git",
