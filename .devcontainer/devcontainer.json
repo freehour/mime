@@ -5,7 +5,7 @@
         "ghcr.io/devcontainers/features/sshd": {},
         "ghcr.io/devcontainers/features/git": {}
     },
-    "runArgs": ["--env-file", ".devcontainer/.env"],
+    // "runArgs": ["--env-file", ".devcontainer/.env"],
     "containerUser": "bun",
     "remoteUser": "bun",
     "postCreateCommand": "bun install",
@@ -37,6 +37,8 @@
                     "source.organizeImports": "never"
                 },
                 "terminal.integrated.defaultProfile.linux": "bash",
+
+                "chat.extensionUnification.enabled": false,
 
                 "material-icon-theme.files.customClones": [
                     {

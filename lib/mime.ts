@@ -6,6 +6,8 @@
 
 import { MimeDetection } from './detection';
 import { MimeParseError } from './error';
+import type { FileExtension } from './file-extension';
+import { inferMimeFromExtension } from './file-extension';
 import { uniqueBy } from './utils';
 
 
@@ -15,26 +17,47 @@ export const MimeSubtype = {
         'jpeg',
         'png',
         'gif',
+        'heic',
         'tiff',
         'bmp',
         'x-icon',
+        'icns',
+        'x-tga',
         'webp',
         'svg+xml',
+        'vnd.ms-dds',
+        'vnd.djvu',
+        'vnd.adobe.photoshop',
+        // 3D Image Types
+        'x-3ds',
     ],
     video: [
         // Video Types
+        '3gpp',
         'mp4',
+        'mpeg',
         'quicktime',
+        'mp2t',
+        'dvd',
         'x-msvideo',
         'x-matroska',
         'webm',
         'x-flv',
+        'x-ms-asf',
+        'x-ms-wmv',
+        'x-ms-vob',
     ],
     audio: [
         // Audio Types
+        'aiff',
+        'x-flac',
+        'x-mpegurl',
+        'mp4',
+        'midi',
         'mpeg',
         'ogg',
         'wav',
+        'x-ms-wma',
     ],
     application: [
         // Structured Types
@@ -43,20 +66,46 @@ export const MimeSubtype = {
         // Compressed Types
         'pdf',
         'zip',
+        'zip-compressed',
         'x-rar-compressed',
         'gzip',
         'x-7z-compressed',
         'x-tar',
+        'x-cbr',
+        'x-deb',
+        'x-rpm',
+        'x-apk',
         // Microsoft Office Types
         'vnd.msword',
         'vnd.ms-excel',
         'vnd.ms-powerpoint',
+        'vnd.ms-outlook',
+        'vnd.ms-project',
+        'vnd.ms-xpsdocument',
+        // Open Document Types
         'vnd.openxmlformats-officedocument.wordprocessingml.document',
         'vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         'vnd.openxmlformats-officedocument.presentationml.presentation',
+        'vnd.oasis.opendocument.text',
+        'vnd.oasis.opendocument.spreadsheet',
+        'vnd.oasis.opendocument.presentation',
+        // Proprietary Types
+        'vnd.apple.pages',
+        'vnd.apple.keynote',
+        'vnd.apple.numbers',
+        'vnd.apple.pkpass',
+        'vnd.wordperfect',
+        'vnd.crystalreports',
+        'x-indesign',
+        'oxps',
+        'x-pagemaker',
+        'x-mspublisher',
+        'x-quarkxpress',
         // Code Types
+        'appx',
         'x-sh',
         'json',
+        'java-vm',
         'xml',
         'javascript',
         'x-httpd-php',
@@ -67,6 +116,94 @@ export const MimeSubtype = {
         'x-pem-file',
         'x-latex',
         'rtf',
+        'scratch3',
+        'vnd.visualstudio.solution',
+        'vnd.visualstudio.vcxproj',
+        'x-xcodeproj',
+        'unity',
+        // Web Types
+        'x-aspx',
+        'x-x509-ca-cert',
+        'x-cfm',
+        'pkcs10',
+        'x-jsp',
+        'xhtml+xml',
+        // Video Types
+        'x-shockwave-flash',
+        // 3D Model Types
+        'x-blender',
+        'x-fbx',
+        'x-3dsmax',
+        // Image Types
+        'dicom',
+        'postscript',
+        'cdr',
+        'emf',
+        'x-sketch',
+        'vnd.ms-visio.drawing',
+        // Datbase Types
+        'vnd.ms-access',
+        'x-msaccess',
+        'x-pdb',
+        'x-sqlite3',
+        'vnd.oasis.opendocument.database',
+        // Executable Types
+        'vnd.android.package-archive',
+        'x-app',
+        'x-ms-application',
+        'x-msdownload',
+        'x-ios-app',
+        'java-archive',
+        'x-executable',
+        // Game Types
+        'x-dem',
+        'x-gam',
+        'x-gba-rom',
+        'x-nes-rom',
+        'x-pak',
+        'x-save-file',
+        // CAD Types
+        'dgn',
+        'acad',
+        'dxf',
+        // GIS Types
+        'gpx+xml',
+        'vnd.google-earth.kml+xml',
+        'vnd.google-earth.kmz',
+        'x-osm+xml',
+        // Plugin Types
+        'x-chrome-extension',
+        'vnd.ms-outlook.ecf',
+        'x-adobe-photoshop-plugin',
+        'x-safari-extension',
+        'x-xpinstall',
+        // Font Types
+        'x-font-ttf',
+        // System Types
+        'x-win-cursor',
+        'x-deskthemepack',
+        'x-msdos-system',
+        'x-ms-shortcut',
+        'x-msdriver',
+        // Settings Types
+        'vnd.symbian.install',
+        // Encoded Types
+        'pgp-keys',
+        // Disk Types
+        'x-apple-diskimage',
+        'x-iso9660-image',
+        'x-mdf',
+        'x-rom',
+        'x-cd-image',
+        // Backup Types
+        'x-abk',
+        'x-arc',
+        'x-bak',
+        'x-tmp',
+        // Miscellaneous Types
+        'x-msi',
+        'x-bittorrent',
+        'x-chrome-download',
     ],
     text: [
         // Code Types
@@ -79,10 +216,12 @@ export const MimeSubtype = {
         'x-go',
         'x-groovy',
         'x-kotlin',
+        'x-lua',
         'x-rust',
         'x-typescript',
         'x-swift',
         'x-perl',
+        'x-objective-c',
         'x-csrc',
         'x-c++src',
         'x-csharp',
@@ -92,6 +231,18 @@ export const MimeSubtype = {
         // Text Types
         'markdown',
         'plain',
+        // Message Types
+        'x-vcard',
+        // Video Types
+        'srt',
+        // Encoded Types
+        'x-uuencode',
+        // Miscellaneous Types
+        'calendar',
+    ],
+    message: [
+        // Message Types
+        'rfc822',
     ],
     multipart: [
         // Form Data types
@@ -103,6 +254,14 @@ export const MimeSubtype = {
         'woff2',
         'ttf',
         'otf',
+    ],
+    model: [
+        // 3D Model Types
+        'vnd.3dm',
+        'vnd.collada+xml',
+        'obj',
+        'stl',
+        'step',
     ],
 } as const satisfies Record<string, string[]>;
 
@@ -391,6 +550,17 @@ export class Mime<Type extends MimeType = MimeType> {
     }
 
     /**
+     * Infers a MIME type from a file extension.
+     * @param extension The file extension to infer the MIME type from.
+     * @returns The inferred MIME type as a `Mime` object.
+     * @see inferMimeFromExtension
+     */
+    static fromExtension(extension: FileExtension): Mime {
+        const mime = inferMimeFromExtension(extension);
+        return Mime.parse(mime);
+    }
+
+    /**
      * Normalizes a MIME type string to a canonical form.
      * This includes parsing the MIME type and returning its string representation.
      *
@@ -425,3 +595,4 @@ export class Mime<Type extends MimeType = MimeType> {
         );
     }
 }
+

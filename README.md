@@ -6,6 +6,6 @@ This package provides a comprehensive set of utilities for working with MIME typ
 
 - **Parsing**: Convert MIME type strings into structured objects with type, subtype, and parameters.
 - **Detection**: Automatically detect MIME types from file content.
-- **File Extensions**: A list of common file extensions.
+- **File Extensions**: A list of common file extensions and their corresponding MIME types.
 
 

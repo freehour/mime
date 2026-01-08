@@ -23,7 +23,7 @@ const magic: Record<PropertyKey, Magic> = {
 
 export interface MimeTypeDefinition<Type extends MimeType = MimeType> {
     id?: string;
-    type: MimeType;
+    type: Type;
     subtype: MimeSubtype<Type>;
     magic?: Magic;
     zipped?: Zipped;
@@ -77,7 +77,7 @@ export const mimeDefinitions: MimeTypeDefinition[] = [
     {
         id: 'icon',
         type: 'image',
-        subtype: 'icon',
+        subtype: 'x-icon',
         magic: [0x00, 0x00, 0x01, 0x00],
     },
     {
@@ -92,7 +92,7 @@ export const mimeDefinitions: MimeTypeDefinition[] = [
     {
         id: 'svg',
         type: 'image',
-        subtype: 'svg',
+        subtype: 'svg+xml',
         pattern: /^\s*<\s*svg[^>]*>/i,
     },
     // Video Types
@@ -111,13 +111,13 @@ export const mimeDefinitions: MimeTypeDefinition[] = [
     {
         id: 'avi',
         type: 'video',
-        subtype: 'avi',
+        subtype: 'x-msvideo',
         magic: [0x52, 0x49, 0x46, 0x46, 0x41, 0x56, 0x49, 0x20], // RIFFAVI
     },
     {
         id: 'mkv',
         type: 'video',
-        subtype: 'mkv',
+        subtype: 'x-matroska',
         magic: [0x1a, 0x45, 0xdf, 0xa3],
     },
     {
@@ -129,7 +129,7 @@ export const mimeDefinitions: MimeTypeDefinition[] = [
     {
         id: 'flv',
         type: 'video',
-        subtype: 'flv',
+        subtype: 'x-flv',
         magic: [0x46, 0x4c, 0x56, 0x01],
     },
     // Audio Types
@@ -172,7 +172,7 @@ export const mimeDefinitions: MimeTypeDefinition[] = [
     {
         id: 'rar',
         type: 'application',
-        subtype: 'rar',
+        subtype: 'x-rar-compressed',
         magic: [0x52, 0x61, 0x72, 0x21],
     },
     {
@@ -184,52 +184,58 @@ export const mimeDefinitions: MimeTypeDefinition[] = [
     {
         id: '7z',
         type: 'application',
-        subtype: '7z',
+        subtype: 'x-7z-compressed',
         magic: [0x37, 0x7a, 0xbc, 0xaf],
     },
     {
         id: 'tar',
         type: 'application',
-        subtype: 'tar',
+        subtype: 'x-tar',
         // TODO: support magic bytes offset, because TAR files have there magic bytes at 257–262 equal "ustar\0" or "ustar ".
     },
     // Microsoft Office Types
     {
         id: 'word',
         type: 'application',
-        subtype: 'word',
+        subtype: 'vnd.msword',
         magic: magic.office,
     },
     {
         id: 'excel',
         type: 'application',
-        subtype: 'excel',
+        subtype: 'vnd.ms-excel',
         magic: magic.office,
     },
     {
         id: 'powerpoint',
         type: 'application',
-        subtype: 'powerpoint',
+        subtype: 'vnd.ms-powerpoint',
+        magic: magic.office,
+    },
+    {
+        id: 'outlook',
+        type: 'application',
+        subtype: 'vnd.ms-outlook',
         magic: magic.office,
     },
     {
         id: 'word_openxml',
         type: 'application',
-        subtype: 'word_openxml',
+        subtype: 'vnd.openxmlformats-officedocument.wordprocessingml.document',
         magic: magic.zip,
         zipped: ['[Content_Types].xml', 'word/document.xml'],
     },
     {
         id: 'excel_openxml',
         type: 'application',
-        subtype: 'excel_openxml',
+        subtype: 'vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         magic: magic.zip,
         zipped: ['[Content_Types].xml', 'xl/workbook.xml'],
     },
     {
         id: 'powerpoint',
         type: 'application',
-        subtype: 'powerpoint_openxml',
+        subtype: 'vnd.openxmlformats-officedocument.presentationml.presentation',
         magic: magic.zip,
         zipped: ['[Content_Types].xml', 'ppt/presentation.xml'],
     },
@@ -237,7 +243,7 @@ export const mimeDefinitions: MimeTypeDefinition[] = [
     {
         id: 'shell',
         type: 'application',
-        subtype: 'shell',
+        subtype: 'x-sh',
         pattern: /^\s*#!/,
     },
     {
@@ -261,13 +267,13 @@ export const mimeDefinitions: MimeTypeDefinition[] = [
     {
         id: 'php',
         type: 'application',
-        subtype: 'php',
+        subtype: 'x-httpd-php',
         pattern: /^\s*<\?php/i,
     },
     {
         id: 'yaml',
         type: 'application',
-        subtype: 'yaml',
+        subtype: 'x-yaml',
         pattern: /^\s*---\s*$/i,
     },
     {
@@ -279,25 +285,25 @@ export const mimeDefinitions: MimeTypeDefinition[] = [
     {
         id: 'powershell',
         type: 'application',
-        subtype: 'powershell',
+        subtype: 'x-powershell',
         pattern: /^\s*%!/,
     },
     {
         id: 'batch',
         type: 'application',
-        subtype: 'batch',
+        subtype: 'x-bat',
         pattern: /^\s*#!/,
     },
     {
         id: 'pem',
         type: 'application',
-        subtype: 'pem',
+        subtype: 'x-pem-file',
         pattern: /^\s*(BEGIN|END)/,
     },
     {
         id: 'latex',
         type: 'application',
-        subtype: 'latex',
+        subtype: 'x-latex',
         pattern: /^\s*(\\documentclass|\\begin|\\end)/i,
     },
     {
@@ -316,19 +322,19 @@ export const mimeDefinitions: MimeTypeDefinition[] = [
     {
         id: 'ruby',
         type: 'text',
-        subtype: 'ruby',
+        subtype: 'x-ruby',
         pattern: /^\s*(class|module|require)/i,
     },
     {
         id: 'python',
         type: 'text',
-        subtype: 'python',
+        subtype: 'x-python',
         pattern: /^\s*(def|class|import)/i,
     },
     {
         id: 'java',
         type: 'text',
-        subtype: 'java',
+        subtype: 'x-java-source',
         pattern: /^\s*(package|import)/i,
     },
     {
@@ -345,67 +351,67 @@ export const mimeDefinitions: MimeTypeDefinition[] = [
     {
         id: 'go',
         type: 'text',
-        subtype: 'go',
+        subtype: 'x-go',
         pattern: /^\s*(package|import|func|var|const)/i,
     },
     {
         id: 'groovy',
         type: 'text',
-        subtype: 'groovy',
+        subtype: 'x-groovy',
         pattern: /^\s*(class|def|if|else|for|while)/i,
     },
     {
         id: 'kotlin',
         type: 'text',
-        subtype: 'kotlin',
+        subtype: 'x-kotlin',
         pattern: /^\s*(fun|val|var|class|import)/i,
     },
     {
         id: 'rust',
         type: 'text',
-        subtype: 'rust',
+        subtype: 'x-rust',
         pattern: /^\s*(fn|struct|enum|impl|use)/i,
     },
     {
         id: 'typescript',
         type: 'text',
-        subtype: 'typescript',
+        subtype: 'x-typescript',
         pattern: /^\s*(interface|type|function|const|let|var|import|export)/i,
     },
     {
         id: 'swift',
         type: 'text',
-        subtype: 'swift',
+        subtype: 'x-swift',
         pattern: /^\s*(@|\/\/)/,
     },
     {
         id: 'perl',
         type: 'text',
-        subtype: 'perl',
+        subtype: 'x-perl',
         pattern: /^\s*(use|package|my)/i,
     },
     {
         id: 'c',
         type: 'text',
-        subtype: 'c',
+        subtype: 'x-csrc',
         pattern: /^\s*(\/\*|\*\/|\*|#)/,
     },
     {
         id: 'cpp',
         type: 'text',
-        subtype: 'cpp',
+        subtype: 'x-c++src',
         pattern: /^\s*(\/\/|#)/,
     },
     {
         id: 'csharp',
         type: 'text',
-        subtype: 'csharp',
+        subtype: 'x-csharp',
         pattern: /^\s*(public|private|class|import)/i,
     },
     {
         id: 'visualbasic',
         type: 'text',
-        subtype: 'visualbasic',
+        subtype: 'x-vb',
         pattern: /^\s*(using|namespace|public)/i,
     },
     {
@@ -423,13 +429,13 @@ export const mimeDefinitions: MimeTypeDefinition[] = [
     {
         id: 'c-header',
         type: 'text',
-        subtype: 'c_header',
+        subtype: 'x-chdr',
         pattern: /^\s*#\s*(include|define)/i,
     },
     {
         id: 'r',
         type: 'text',
-        subtype: 'r',
+        subtype: 'x-r-source',
         pattern: /^\s*(library|function|if|else|for|while)/i,
     },
     // Text
@@ -444,5 +450,12 @@ export const mimeDefinitions: MimeTypeDefinition[] = [
         type: 'text',
         subtype: 'markdown',
         pattern: /^\s*(#{1,6}\s+\w+|\*\s+\w+|-\s+\w+|\d+\.\s+\w+|\[.+\]\(http.+)/i,
+    },
+    // Message Types
+    {
+        id: 'rfc822',
+        type: 'message',
+        subtype: 'rfc822',
+        pattern: /^\s*From:\s+/i,
     },
 ];
