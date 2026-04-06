@@ -204,6 +204,8 @@ const FileExtensionMap = {
     'gim': 'application/vnd.groove-identity-message',
     'gmx': 'application/vnd.gmx',
     'gnumeric': 'application/x-gnumeric',
+    'go': 'text/x-go',
+    'gotmpl': 'text/x-gotmpl',
     'gph': 'application/vnd.flographit',
     'gqf': 'application/vnd.grafeq',
     'gram': 'application/srgs',

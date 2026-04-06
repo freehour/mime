@@ -454,6 +454,8 @@ export const MimeSubtype = {
         'x-font-type1',
         'x-futuresplash',
         'x-gnumeric',
+        'x-go',
+        'x-gotmpl',
         'x-gtar',
         'x-hdf',
         'x-java-jnlp-file',
