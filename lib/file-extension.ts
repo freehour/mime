@@ -774,9 +774,9 @@ export type FileExtensionWithDot = `.${typeof FileExtension[number]}` | (string 
 /**
  * Infers a MIME type from a file extension.
  * @param extension The file extension to infer the MIME type from.
- * @returns The inferred MIME type as a string.
+ * @returns The inferred MIME type as a string, or `undefined` if the extension is not recognized.
  */
-export function inferMimeFromExtension(extension: FileExtension): MimeString {
+export function inferMimeFromExtension(extension: FileExtension): MimeString | undefined {
     switch (extension) {
         case 'doc':
             return 'application/vnd.msword';
@@ -1203,6 +1203,6 @@ export function inferMimeFromExtension(extension: FileExtension): MimeString {
         case 'torrent':
             return 'application/x-bittorrent';
         default:
-            return 'application/octet-stream';
+            return undefined;
     }
 }

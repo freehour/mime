@@ -12,6 +12,7 @@ interface MimeDefinitonMatch {
 }
 
 export interface MimeDetectionParams {
+
     /**
      * List of custom MIME type definitions to include in the detection.
      *

@@ -1,5 +1,6 @@
 
 export interface MimeParseErrorOptions extends ErrorOptions {
+
     /**
      * The encountered expression that could not be parsed.
      */

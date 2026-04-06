@@ -310,6 +310,7 @@ export type MimeString = MimeCode | (string & {});
 
 
 export interface MimeCompareOptions {
+
     /**
      * Whether to check parameters in the comparison.
      * If `false`, parameters are ignored in the comparison.
@@ -321,6 +322,7 @@ export interface MimeCompareOptions {
 }
 
 export interface MimeParams<Type extends MimeType = MimeType> {
+
     /**
      * The type of the MIME type is the primary category, e.g. `text`, `image`, `audio`, etc.
      * Can be a wildcard `*` to match any type, forces the subtype to also be `*`.
@@ -373,16 +375,17 @@ export class Mime<Type extends MimeType = MimeType> {
      * @returns Whether the two MIME types are equal.
      */
     equals(
-        other: Mime,
+        other: Mime | MimeString,
         { checkParameters = true }: MimeCompareOptions = {},
     ): boolean {
-        return this.type === other.type
-            && this.subtype === other.subtype
+        const mime = other instanceof Mime ? other : Mime.parse(other);
+        return this.type === mime.type
+            && this.subtype === mime.subtype
             && (!checkParameters
                 || (
-                    Object.keys(this.parameters).length === Object.keys(other.parameters).length
+                    Object.keys(this.parameters).length === Object.keys(mime.parameters).length
                     && Object.entries(this.parameters).every(
-                        ([k, v]) => other.parameters[k] === v,
+                        ([k, v]) => mime.parameters[k] === v,
                     )
                 )
             );
@@ -400,14 +403,15 @@ export class Mime<Type extends MimeType = MimeType> {
      * const accepted = Mime.parse('text/*').includes(Mime.parse('text/plain')); // true
      */
     includes(
-        other: Mime,
+        other: Mime | MimeString,
         { checkParameters = true }: MimeCompareOptions = {},
     ): boolean {
-        return (this.type === '*' || this.type === other.type)
-            && (this.subtype === '*' || this.subtype === other.subtype)
+        const mime = other instanceof Mime ? other : Mime.parse(other);
+        return (this.type === '*' || this.type === mime.type)
+            && (this.subtype === '*' || this.subtype === mime.subtype)
             && (!checkParameters
                 || Object.entries(this.parameters).every(
-                    ([k, v]) => other.parameters[k] === v,
+                    ([k, v]) => mime.parameters[k] === v,
                 )
             );
     }
@@ -552,12 +556,12 @@ export class Mime<Type extends MimeType = MimeType> {
     /**
      * Infers a MIME type from a file extension.
      * @param extension The file extension to infer the MIME type from.
-     * @returns The inferred MIME type as a `Mime` object.
+     * @returns The inferred MIME type as a `Mime` object, or `undefined` if the extension is not recognized.
      * @see inferMimeFromExtension
      */
-    static fromExtension(extension: FileExtension): Mime {
+    static fromExtension(extension: FileExtension): Mime | undefined {
         const mime = inferMimeFromExtension(extension);
-        return Mime.parse(mime);
+        return mime !== undefined ? Mime.parse(mime) : undefined;
     }
 
     /**
