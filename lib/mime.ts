@@ -456,6 +456,7 @@ export const MimeSubtype = {
         'x-gnumeric',
         'x-gtar',
         'x-hdf',
+        'x-httpd-php',
         'x-java-jnlp-file',
         'x-latex',
         'x-mobipocket-ebook',
