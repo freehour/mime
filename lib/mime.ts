@@ -487,6 +487,7 @@ export const MimeSubtype = {
         'x-shockwave-flash',
         'x-stuffit',
         'x-stuffitx',
+        'x-subrip',
         'x-sv4cpio',
         'x-sv4crc',
         'x-tar',

@@ -542,6 +542,7 @@ const FileExtensionMap = {
     'spq': 'application/scvp-vp-request',
     'sql': 'application/sql',
     'src': 'application/x-wais-source',
+    'srt': 'application/x-subrip',
     'sru': 'application/sru+xml',
     'srx': 'application/sparql-results+xml',
     'sse': 'application/vnd.kodak-descriptor',
