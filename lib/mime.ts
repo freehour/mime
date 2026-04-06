@@ -76,7 +76,7 @@ export const MimeSubtype = {
         'x-rpm',
         'x-apk',
         // Microsoft Office Types
-        'vnd.msword',
+        'msword',
         'vnd.ms-excel',
         'vnd.ms-powerpoint',
         'vnd.ms-outlook',
