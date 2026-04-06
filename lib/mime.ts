@@ -36,6 +36,7 @@ export const MimeSubtype = {
         'java-archive',
         'javascript',
         'json',
+        'jsonl',
         'ld+json',
         'mac-binhex40',
         'mac-compactpro',

@@ -269,6 +269,8 @@ const FileExtensionMap = {
     'jpm': 'video/jpm',
     'js': 'application/javascript',
     'json': 'application/json',
+    'jsonl': 'application/jsonl',
+    'jsonld': 'application/ld+json',
     'karbon': 'application/vnd.kde.karbon',
     'kfo': 'application/vnd.kde.kformula',
     'kia': 'application/vnd.kidspiration',
