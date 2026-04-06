@@ -197,7 +197,7 @@ export const mimeDefinitions: MimeTypeDefinition[] = [
     {
         id: 'word',
         type: 'application',
-        subtype: 'vnd.msword',
+        subtype: 'msword',
         magic: magic.office,
     },
     {
@@ -272,8 +272,8 @@ export const mimeDefinitions: MimeTypeDefinition[] = [
     },
     {
         id: 'yaml',
-        type: 'application',
-        subtype: 'x-yaml',
+        type: 'text',
+        subtype: 'yaml',
         pattern: /^\s*---\s*$/i,
     },
     {

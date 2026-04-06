@@ -1,5 +1,7 @@
 import JSZip from 'jszip';
 
+import { assert } from '@freehour/assert';
+
 import type { Magic, MimeTypeDefinition, Zipped } from './definitions';
 import { bufferCheckSize, hasChoices, mimeDefinitions } from './definitions';
 
@@ -127,7 +129,7 @@ export class MimeDetection {
         matches.sort(byPriority);
 
         // keep the first matches that have the same priority
-        const end = matches.findIndex(match => byPriority(match, matches[0]) !== 0);
+        const end = matches.findIndex(match => byPriority(match, assert.value(matches[0])) !== 0);
         return matches.slice(0, end === -1 ? undefined : end)
             .map(match => match.definition);
     }
