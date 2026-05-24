@@ -653,6 +653,7 @@ export const MimeSubtype = {
         'vnd.sun.j2me.app-descriptor',
         'vnd.wap.wml',
         'vnd.wap.wmlscript',
+        'vtt',
         'x-asm',
         'x-c',
         'x-c++src',

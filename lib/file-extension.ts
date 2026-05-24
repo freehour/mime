@@ -640,6 +640,7 @@ const FileExtensionMap = {
     'vsd': 'application/vnd.visio',
     'vsdx': 'application/vnd.visio2013',
     'vsf': 'application/vnd.vsf',
+    'vtt': 'text/vtt',
     'vtu': 'model/vnd.vtu',
     'vxml': 'application/voicexml+xml',
     'wad': 'application/x-doom',
