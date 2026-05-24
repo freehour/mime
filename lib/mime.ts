@@ -924,7 +924,7 @@ export class Mime<Type extends MimeType = MimeType> {
      * The string must be in the format `type/subtype; key=value; ...`.
      *
      * @param mime The MIME string to parse.
-     * @returns Result with a `Mime` object representing the parsed MIME type or a `ParseError` if the string is invalid.
+     * @returns A `Mime` object representing the parsed MIME type.
      * @throws {MimeParseError} If the MIME type string is invalid.
      * @example
      * Mime.parse('text/plain; charset=utf-8'); // Mime { type: 'text', subtype: 'plain', parameters: { charset: 'utf-8' } }
