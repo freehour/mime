@@ -1018,7 +1018,7 @@ export class Mime<Type extends MimeType = MimeType> {
      *
      * @param mime The MIME string to normalize.
      * @returns The normalized MIME type string.
-     * @throws {ParseError} If the MIME type string is invalid.
+     * @throws {MimeParseError} If the MIME type string is invalid.
      * @example
      * Mime.normalize('text / plain;  charset ="utf-8"'); // 'text/plain; charset=utf-8'
      */
