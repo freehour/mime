@@ -625,6 +625,7 @@ export const MimeSubtype = {
         'voice-message',
     ],
     text: [
+        'asciidoc',
         'cache-manifest',
         'calendar',
         'css',

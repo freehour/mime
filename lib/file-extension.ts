@@ -17,6 +17,8 @@ const FileExtensionMap = {
     'acc': 'application/vnd.americandynamics.acc',
     'ace': 'application/x-ace-compressed',
     'acu': 'application/vnd.acucobol',
+    'adoc': 'text/asciidoc',
+    'asciidoc': 'text/asciidoc',
     'adp': 'audio/adpcm',
     'aep': 'application/vnd.audiograph',
     'afp': 'application/vnd.ibm.modcap',
