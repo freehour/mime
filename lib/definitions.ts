@@ -451,6 +451,18 @@ export const mimeDefinitions: MimeTypeDefinition[] = [
         subtype: 'markdown',
         pattern: /^\s*(#{1,6}\s+\w+|\*\s+\w+|-\s+\w+|\d+\.\s+\w+|\[.+\]\(http.+)/i,
     },
+    {
+        id: 'asciidoc',
+        type: 'text',
+        subtype: 'asciidoc',
+        pattern: /^\s*(=+\s+\w+|==+\s+\w+|\*\s+\w+|-\s+\w+|\d+\.\s+\w+)/i,
+    },
+    {
+        id: 'vtt',
+        type: 'text',
+        subtype: 'vtt',
+        pattern: /^\s*WEBVTT\s*$/i,
+    },
     // Message Types
     {
         id: 'rfc822',
