@@ -793,7 +793,7 @@ export interface MimeParams<Type extends MimeType = MimeType> {
 
 
 /**
- * Represents a MIME type with its type, subtype, and parameters.
+ * Represents a MIME type with its type and subtype.
  * Provides methods to compare MIME types, check for inclusion, and parse MIME strings.
  */
 export class Mime<Type extends MimeType = MimeType> {
@@ -816,6 +816,17 @@ export class Mime<Type extends MimeType = MimeType> {
      */
     get hasParameters(): boolean {
         return Object.keys(this.parameters).length > 0;
+    }
+
+    /**
+     * Returns a new MIME type with all parameters cleared.
+     * @returns A new MIME type without parameters.
+     */
+    stripParameters(): Mime<Type> {
+        return new Mime({
+            type: this.type,
+            subtype: this.subtype,
+        });
     }
 
     /**
