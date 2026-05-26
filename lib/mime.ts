@@ -762,13 +762,13 @@ export type MimeString = MimeCode | (string & {});
 export interface MimeCompareOptions {
 
     /**
-     * Whether to check parameters in the comparison.
-     * If `false`, parameters are ignored in the comparison.
-     * @default true
+     * Whether to ignore parameters in the comparison.
+     * If `true`, parameters are ignored in the comparison.
+     * @default false
      * @example
-     * Mime.parse('text/plain; charset=utf-8').equals(Mime.parse('text/plain'), { checkParameters: false }); // true
+     * Mime.parse('text/plain; charset=utf-8').equals(Mime.parse('text/plain'), { ignoreParameters: true }); // true
      */
-    checkParameters?: boolean;
+    ignoreParameters?: boolean;
 }
 
 export interface MimeParams<Type extends MimeType = MimeType> {
@@ -837,12 +837,12 @@ export class Mime<Type extends MimeType = MimeType> {
      */
     equals(
         other: Mime | MimeString,
-        { checkParameters = true }: MimeCompareOptions = {},
+        { ignoreParameters = false }: MimeCompareOptions = {},
     ): boolean {
         const mime = other instanceof Mime ? other : Mime.parse(other);
         return this.type === mime.type
             && this.subtype === mime.subtype
-            && (!checkParameters
+            && (ignoreParameters
                 || (
                     Object.keys(this.parameters).length === Object.keys(mime.parameters).length
                     && Object.entries(this.parameters).every(
@@ -865,12 +865,12 @@ export class Mime<Type extends MimeType = MimeType> {
      */
     includes(
         other: Mime | MimeString,
-        { checkParameters = true }: MimeCompareOptions = {},
+        { ignoreParameters = false }: MimeCompareOptions = {},
     ): boolean {
         const mime = other instanceof Mime ? other : Mime.parse(other);
         return (this.type === '*' || this.type === mime.type)
             && (this.subtype === '*' || this.subtype === mime.subtype)
-            && (!checkParameters
+            && (ignoreParameters
                 || Object.entries(this.parameters).every(
                     ([k, v]) => mime.parameters[k] === v,
                 )
